@@ -97,12 +97,12 @@ router.all('/getTicketList',function(req,res,next){
 			"ticketCode":"Q1323242343223",
 			"ticketName": "洗涤科技馆门票",
 			"ticketStatus": "wait_appointment",
-			"startDate": new Date().getDate(),
-			"endDate": new Date().getDate(),
+			"startDate": new Date().getTime(),
+			"endDate": new Date().getTime(),
 			"price":100.00,
 			"visitor":"@cname",
 			"visitorMobile":"18665392876",
-			"useTime":new Date().getDate()
+			"useTime":new Date().getTime()
 		}]
 	});
 	if(!token){
@@ -126,12 +126,12 @@ router.all('/getTicketDetail',function(req,res,next){
 			"ticketScode":"78657865",
 			"ticketName": "洗涤科技馆门票",
 			"ticketStatus": "wait_appointment",
-			"startDate": new Date().getDate(),
-			"endDate": new Date().getDate(),
+			"startDate": new Date().getTime(),
+			"endDate": new Date().getTime(),
 			"price":100.00,
 			"visitor":"@cname",
 			"visitorMobile":"18665392876",
-			"useTime":new Date().getDate(),
+			"useTime":new Date().getTime(),
 			"venueCode":"4401E01",
 			"venueName":"广州市正佳馆",
 			"venueSname":"正佳馆",
@@ -160,8 +160,8 @@ router.all('/getAppointmentVenueList',function(req,res,next){
 			"venueCode":"@zip",
 			"venueName":"广州市正佳馆",
 			"venueSname":"正佳馆",
-			"startDate": new Date().getDate(),
-			"endDate": new Date().getDate(),
+			"startDate": new Date().getTime(),
+			"endDate": new Date().getTime(),
 			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼"
 		}]
 	});
@@ -182,7 +182,7 @@ router.all('/getAppointmentTimeList',function(req,res,next){
 		"responseMsg": "请求成功",
 		"responseCode": 0,
 		"itemList|1-10 ": [{
-			"date":new Date().getDate(),
+			"date":new Date().getTime(),
 			"timesList|1-10 ":[{
 				"timesCode":"@zip",
 				"timesName":"08:00-08:45"
