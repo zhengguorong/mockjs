@@ -1,46 +1,39 @@
 var request = require('supertest');
 var should = require('should');
 
-describe('检票模块', function(res) {
-	it('获取首页图文列表',function(done){
-		request('http://localhost:3000')
-		.get('/')
+//加入公共参数
+function buildUrl(url){
+	var sceString="?client=wx&cuid=abc&format=json&time=1456830432362&version=3.0.0.417&sign=06b858215e58682041d214e02ffd69df";
+	var url=url+sceString;
+	return url;
+}
+
+describe('商城首页接口测试', function(res) {
+	it('获取首页推荐商品列表',function(done){
+		request("http://tmallapi.bluemoon.com.cn")
+		.post(buildUrl("/moonMall-gateway/item/getRecommendItem"))
+		.send({recommendType:'all'})
 		.expect(200)
 		.end(function(err,res){
 			var data=res.body;
-			//类型判断
-			data.isSuccess.should.be.a.String();
-			data.responseCode.should.be.a.String();
-			data.list.should.be.a.Array();
-			data.should.have.property('isSuccess','true');
-			data.should.have.property('responseCode','1001');
-			if(data.list.length>0){
-				data.list[0].should.be.a.Object();
-				data.list[0].id.should.be.a.Number();
+			data.should.have.properties({isSuccess:true,responseCode:0,responseMsg:'请求成功'})
+			data.itemRecommentList.should.be.a.Array();
+			if(data[0]){
+				data[0].should.be.a.Object();
+				data[0].should.have.keys()
 			}
-			done();
-		});
-	});
-	it('获取预约信息接口',function(done){
-		request("http://localhost:3000")
-			.get('/wechats/activity/venuePlan/findAllBooking')
-			.expect(200)
-			.end(function(err,res){
-				var data=res.body;
-				data.isSuccess.should.be.a.Boolean();
-				data.responseCode.should.be.a.Number();
-				data.responseMgs.should.be.a.String();
-				data.list.should.be.a.Array();
-				data.should.have.property('isSuccess',true);
-				data.should.have.property('responseCode',0);
-				if(data.list.length>0){
-					data.list[0].should.be.a.Object();
-					data.list[0].id.should.be.a.Number();
-					data.list[0].actDate.should.be.a.String();
-					//判断手机号长度
-					data.list[0].userId.should.have.length(11);
-				}
-				done();
-			})
+			done()
+		})
+	})
+	it('获取首页推荐列表－－异常处理',function(done){
+		request("http://tmallapi.bluemoon.com.cn")
+		.post(buildUrl("/moonMall-gateway/item/getRecommendItem"))
+		.send({})
+		.expect(200)
+		.end(function(err,res){
+			var data=res.body;
+			data.should.have.properties({isSuccess:false,responseCode:1101,responseMsg:'非法参数'})
+			done()
+		})
 	})
 });
