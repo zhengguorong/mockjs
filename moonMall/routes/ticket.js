@@ -7,11 +7,6 @@ var failData=Mock.mock({
 	responseCode:1101,
 	responseMsg:"非法参数"
 });
-var tokenError=Mock.mock({
-	isSuccess:false,
-	responseCode:2301,
-	responseMsg:"token失效"
-});
 
 router.all('/getVenueList',function(req,res,next){
 	var token=req.body.token;
@@ -35,10 +30,7 @@ router.all('/getVenueList',function(req,res,next){
 		res.send(failData);
 		return;
 	}
-	if(token!="abcde"){
-		res.send(tokenError);
-		return;
-	}
+
 	res.send(successData);
 });
 
@@ -52,12 +44,8 @@ router.all('/checkScanCode',function(req,res,next){
 		responseMsg:"此码无效"
 	});
 
-	if(!token){
+	if(!token||!ticketCode){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 	if(ticketCode!="asd"){
@@ -90,29 +78,9 @@ router.all('/comesInto',function(req,res,next){
 		"responseMsg": "请求成功",
 		"responseCode": 0
 	});
-	var venueCodeError = Mock.mock({
-		isSuccess:false,
-		responseCode:10101,
-		responseMsg:"门票已使用"
-	});
-	var timesCodeError = Mock.mock({
-		isSuccess:false,
-		responseCode:10102,
-		responseMsg:"门票已过期"
-	});
-	if(!token){
+	if(!token||!venueCode||!timesCode||!ticketCode){
 		res.send(failData);
 		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
-		return;
-	}
-	if(venueCode!="abc"){
-		res.send(venueCodeError);
-	}
-	if(timesCode!="abc"){
-		res.send(timesCodeError);
 	}
 
 	res.send(successData);
@@ -129,20 +97,16 @@ router.all('/getTicketList',function(req,res,next){
 			"ticketCode":"Q1323242343223",
 			"ticketName": "洗涤科技馆门票",
 			"ticketStatus": "wait_appointment",
-			"startDate": "20160301182303002",
-			"endDate": "20160322140234003",
+			"startDate": new Date().getDate(),
+			"endDate": new Date().getDate(),
 			"price":100.00,
 			"visitor":"@cname",
 			"visitorMobile":"18665392876",
-			"useTime":20160302145409003
+			"useTime":new Date().getDate()
 		}]
 	});
 	if(!token){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 
@@ -162,24 +126,20 @@ router.all('/getTicketDetail',function(req,res,next){
 			"ticketScode":"78657865",
 			"ticketName": "洗涤科技馆门票",
 			"ticketStatus": "wait_appointment",
-			"startDate": 20160301182303002,
-			"endDate": 20160322140234003,
+			"startDate": new Date().getDate(),
+			"endDate": new Date().getDate(),
 			"price":100.00,
 			"visitor":"@cname",
 			"visitorMobile":"18665392876",
-			"useTime":20160302145409003,
+			"useTime":new Date().getDate(),
 			"venueCode":"4401E01",
 			"venueName":"广州市正佳馆",
 			"venueSname":"正佳馆",
 			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼"
 		}
 	});
-	if(!token){
+	if(!token||!ticketCode){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 
@@ -200,17 +160,13 @@ router.all('/getAppointmentVenueList',function(req,res,next){
 			"venueCode":"@zip",
 			"venueName":"广州市正佳馆",
 			"venueSname":"正佳馆",
-			"startDate": 20160301182303002,
-			"endDate": 20160322140234003,
+			"startDate": new Date().getDate(),
+			"endDate": new Date().getDate(),
 			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼"
 		}]
 	});
-	if(!token){
+	if(!token||!ticketCode){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 
@@ -226,19 +182,15 @@ router.all('/getAppointmentTimeList',function(req,res,next){
 		"responseMsg": "请求成功",
 		"responseCode": 0,
 		"itemList|1-10 ": [{
-			"date":20160301182303002,
+			"date":new Date().getDate(),
 			"timesList|1-10 ":[{
 				"timesCode":"@zip",
 				"timesName":"08:00-08:45"
 			}]
 		}]
 	});
-	if(!token){
+	if(!token||!venueCode){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 
@@ -258,12 +210,8 @@ router.all('/confirmAppointment',function(req,res,next){
 		"responseMsg": "请求成功",
 		"responseCode": 0
 	});
-	if(!token){
+	if(!token||!ticketCode||!venueCode||!timesCode){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 
@@ -279,12 +227,8 @@ router.all('/cancelAppointment',function(req,res,next){
 		"responseMsg": "请求成功",
 		"responseCode": 0
 	});
-	if(!token){
+	if(!token||!ticketCode){
 		res.send(failData);
-		return;
-	}
-	if(token!="abcde"){
-		res.send(tokenError);
 		return;
 	}
 
