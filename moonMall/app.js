@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/ticket',ticket);
+app.use('/bluemoon-control/ticket',ticket);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
