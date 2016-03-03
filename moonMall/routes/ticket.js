@@ -1,6 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var Mock = require('mockjs');
+var Random = Mock.Random;
+
+Random.extend({
+	ticketStatus: function(date) {
+		var ticketStatus = ['wait_appointment', 'already_appointment', 'wait_appointment_already_use', 'already_appointment_already_use', 'wait_appointment_already_timeout', 'already_appointment_already_timeout'];
+		return this.pick(ticketStatus)
+	}
+});
 
 var failData=Mock.mock({
 	isSuccess:false,
@@ -96,7 +104,7 @@ router.all('/getTicketList',function(req,res,next){
 		"itemList|1-10 ": [{
 			"ticketCode":"Q1323242343223",
 			"ticketName": "洗涤科技馆门票",
-			"ticketStatus": "wait_appointment",
+			"ticketStatus": "@ticketStatus",
 			"startDate": new Date().getTime(),
 			"endDate": new Date().getTime(),
 			"price":100.00,
@@ -125,7 +133,7 @@ router.all('/getTicketDetail',function(req,res,next){
 			"ticketCode":"Q1323242343223",
 			"ticketScode":"78657865",
 			"ticketName": "洗涤科技馆门票",
-			"ticketStatus": "wait_appointment",
+			"ticketStatus": "@ticketStatus",
 			"startDate": new Date().getTime(),
 			"endDate": new Date().getTime(),
 			"price":100.00,
