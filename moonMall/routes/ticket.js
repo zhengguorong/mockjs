@@ -152,7 +152,7 @@ router.all('/getTicketDetail',function(req,res,next){
 			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼",
 			"datesName":new Date().getTime(),
 			"timesCode":"@zip",
-			"timesName":"洗涤科技馆",
+			"timesName":"08:00-09:00",
 			"venueStartDate":new Date().getTime(),
 			"venueEndDate":timestamp
 		}
