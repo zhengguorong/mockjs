@@ -7,6 +7,10 @@ Random.extend({
 	ticketStatus: function(date) {
 		var ticketStatus = ['wait_appointment', 'already_appointment', 'wait_appointment_already_use', 'already_appointment_already_use', 'wait_appointment_already_timeout', 'already_appointment_already_timeout'];
 		return this.pick(ticketStatus)
+	},
+	ticketType: function(date){
+		var ticketType = ['ticket', 'moonFriend', 'moonAngel', 'emp'];
+		return this.pick(ticketType)
 	}
 });
 
@@ -46,18 +50,15 @@ router.all('/checkScanCode',function(req,res,next){
 	var token=req.body.token;
 	var ticketCode=req.body.ticketCode;
 
-	var tickeCodeError = Mock.mock({
-		isSuccess:false,
-		responseCode:10103,
-		responseMsg:"此码无效"
-	});
+	//var tickeCodeError = Mock.mock({
+	//	isSuccess:false,
+	//	responseCode:10103,
+	//	responseMsg:"此码无效"
+	//});
 
 	if(!token||!ticketCode){
 		res.send(failData);
 		return;
-	}
-	if(ticketCode!="asd"){
-		res.send(tickeCodeError);
 	}
 
 	var successData=Mock.mock({
@@ -65,7 +66,7 @@ router.all('/checkScanCode',function(req,res,next){
 		"responseMsg": "请求成功",
 		"responseCode": 0,
 		"appointmentInfo ": {
-			"ticketType":"angel",
+			"ticketType":"@ticketType",
 			"venueCode": "4401E01",
 			"venueSname": "@cname",
 			"timesCode": "a2343324",
@@ -127,6 +128,8 @@ router.all('/getTicketList',function(req,res,next){
 router.all('/getTicketDetail',function(req,res,next){
 	var ticketCode=req.body.ticketCode;
 	var token=req.body.token;
+	var endDate = "2016/03/22 11:30:00";
+	var timestamp = new Date(endDate).getTime();
 
 	var successData=Mock.mock({
 		"isSuccess": true,
@@ -149,7 +152,9 @@ router.all('/getTicketDetail',function(req,res,next){
 			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼",
 			"datesName":new Date().getTime(),
 			"timesCode":"@zip",
-			"timesName":"洗涤科技馆"
+			"timesName":"洗涤科技馆",
+			"venueStartDate":new Date().getTime(),
+			"venueEndDate":timestamp
 		}
 	});
 	if(!token||!ticketCode){
@@ -197,7 +202,7 @@ router.all('/getAppointmentTimeList',function(req,res,next){
 		"responseCode": 0,
 		"itemList|3-10": [{
 			"date":new Date().getTime(),
-			"timesList|1-10 ":[{
+			"timesList|3-10":[{
 				"timesCode":"@zip",
 				"timesName":"08:00-08:45"
 			}]
