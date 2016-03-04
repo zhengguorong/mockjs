@@ -110,7 +110,10 @@ router.all('/getTicketList',function(req,res,next){
 			"price":100.00,
 			"visitor":"@cname",
 			"visitorMobile":"18665392876",
-			"useTime":new Date().getTime()
+			"useTime":new Date().getTime(),
+			"appointmentTime":new Date().getTime(),
+			"timesCode":"@zip",
+			"timesName":"洗涤科技馆"
 		}]
 	});
 	if(!token){
@@ -143,7 +146,10 @@ router.all('/getTicketDetail',function(req,res,next){
 			"venueCode":"4401E01",
 			"venueName":"广州市正佳馆",
 			"venueSname":"正佳馆",
-			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼"
+			"venueAddress":"广东省广州市天河区天河路123号正佳广场四楼",
+			"datesName":new Date().getTime(),
+			"timesCode":"@zip",
+			"timesName":"洗涤科技馆"
 		}
 	});
 	if(!token||!ticketCode){
