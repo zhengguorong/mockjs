@@ -65,7 +65,7 @@ router.all('/checkScanCode',function(req,res,next){
 		"isSuccess": true,
 		"responseMsg": "请求成功",
 		"responseCode": 0,
-		"appointmentInfo ": {
+		"appointmentInfo": {
 			"ticketType":"@ticketType",
 			"venueCode": "4401E01",
 			"venueSname": "@cname",
@@ -129,6 +129,8 @@ router.all('/getTicketDetail',function(req,res,next){
 	var ticketCode=req.body.ticketCode;
 	var token=req.body.token;
 	var endDate = "2016/03/22 11:30:00";
+	var nowDate = new Date().toLocaleString();
+	console.log(nowDate);
 	var timestamp = new Date(endDate).getTime();
 
 	var successData=Mock.mock({
