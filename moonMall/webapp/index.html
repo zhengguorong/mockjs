@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">蓝月亮数据MOCK平台</a>
+        </div>
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li><a href="#">Dashboard</a></li>-->
+                <!--<li><a href="#">Settings</a></li>-->
+                <!--<li><a href="#">Profile</a></li>-->
+                <!--<li><a href="#">Help</a></li>-->
+            <!--</ul>-->
+            <!--<form class="navbar-form navbar-right">-->
+                <!--<input type="text" class="form-control" placeholder="Search...">-->
+            <!--</form>-->
+        <!--</div>-->
+    </div>
+</nav>
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="URL" class="control-label">访问地址:</label>
+                        <input type="text" class="form-control" id="URL" data-bind="value:editObj.url">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label">接口说明:</label>
+                        <input type="text" class="form-control" id="description" data-bind="value:editObj.description">
+                    </div>
+                    <div class="form-group">
+                        <label for="params-text" class="control-label">请求参数:</label>
+                        <textarea class="form-control" id="params-text" data-bind="value:editObj.params"></textarea>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="failTpl-text" class="control-label">失败模板:</label>
+                        <textarea class="form-control" id="failTpl-text" data-bind="value:editObj.failTpl"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="successTpl-text" class="control-label">成功模板:</label>
+                        <textarea class="form-control" id="successTpl-text" data-bind="value:editObj.successTpl"  rows="5"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-bind="click:$root.update">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="addModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">新增</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="URL" class="control-label">访问地址:</label>
+                        <input type="text" class="form-control" id="URL" data-bind="value:addObj.url">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label">接口说明:</label>
+                        <input type="text" class="form-control" id="description" data-bind="value:addObj.description">
+                    </div>
+                    <div class="form-group">
+                        <label for="params-text" class="control-label">请求参数:</label>
+                        <textarea class="form-control" id="params-text" data-bind="value:addObj.params"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="failTpl-text" class="control-label">失败模板:</label>
+                        <textarea class="form-control" id="failTpl-text" data-bind="value:addObj.failTpl"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="successTpl-text" class="control-label">成功模板:</label>
+                        <textarea class="form-control" id="successTpl-text" data-bind="value:addObj.successTpl" rows="5"></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-bind="click:$root.add">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="testModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">模拟</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="URL" class="control-label">访问地址:</label>
+                        <input type="text" class="form-control" id="URL" data-bind="value:testObj.url" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label">接口说明:</label>
+                        <input type="text" class="form-control" id="description" data-bind="value:testObj.description" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="params" class="control-label">请求参数:</label>
+                        <input type="text" class="form-control" id="params" data-bind="value:testObj.params" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label  class="control-label">返回结果:</label>
+                        <pre data-bind="html:testObj.result"></pre>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-bind="click:$root.add">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li data-bind="css:{active:curProject()=='moonMall'},click:setCurProject.bind($data,'moonMall')"><a href="#">月亮小屋</a></li>
+                <li data-bind="css:{active:curProject()=='moonAngel'},click:setCurProject.bind($data,'moonAngel')"><a href="#">月亮天使</a></li>
+                <li data-bind="css:{active:curProject()=='check'},click:setCurProject.bind($data,'check')"><a href="#">检票模块</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+
+            <h2 class="sub-header">接口列表<span style="float:right;"  ><button type="button" data-toggle="modal" data-target="#addModal" class="btn btn-success btn-sm">新增</button></span></h2>
+            <div class="table-responsive">
+                <table class="table table-condensed table-striped">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">序号</th>
+                        <th class="col-md-2">说明</th>
+                        <th class="col-md-2">访问地址</th>
+                        <!--<th class="col-md-2">请求参数</th>-->
+                        <!--<th class="col-md-2">成功模板</th>-->
+                        <!--<th class="col-md-1">失败模板</th>-->
+                        <th class="col-md-1">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody data-bind="foreach:list">
+                    <tr>
+                        <td><div data-bind="text:$index"></div></td>
+                        <td><div data-bind="text:description"></div></td>
+                        <td><div data-bind="text:url"></div></td>
+                        <!--<td><div data-bind="text:params"></div></td>-->
+                        <!--<td>123</td>-->
+                        <!--<td><div data-bind="text:successTpl"></div></td>-->
+                        <!--<td>123</td>-->
+                        <!--<td><div data-bind="text:failTpl"></div></td>-->
+                        <!--<td >123</td>-->
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#testModal" data-bind="click:$root.test">模拟</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-bind="click:$root.edit">修改</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bind="click:$root.delete">删除</button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/knockout.debug.js"></script>
+<script src="/javascripts/knockout.mapping-latest.js"></script>
+<script src="/js/index.js"></script>
+</html>
