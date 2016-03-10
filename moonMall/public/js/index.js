@@ -70,7 +70,17 @@ function ViewModel(){
             }
         })
     }
-
+    //清楚空格与换行符
+    self.tirmEditAll=function(){
+        self.editObj.successTpl(self.editObj.successTpl().replace(/\ +/g,"").replace(/[ ]/g,"").replace(/[\r\n]/g,""))
+        self.editObj.failTpl(self.editObj.failTpl().replace(/\ +/g,"").replace(/[ ]/g,"").replace(/[\r\n]/g,""))
+        self.editObj.params(self.editObj.params().replace(/\ +/g,"").replace(/[ ]/g,"").replace(/[\r\n]/g,""))
+    }
+    self.tirmAddAll=function(){
+        self.addObj.successTpl(self.addObj.successTpl().replace(/\ +/g,"").replace(/[ ]/g,"").replace(/[\r\n]/g,""))
+        self.addObj.failTpl(self.addObj.failTpl().replace(/\ +/g,"").replace(/[ ]/g,"").replace(/[\r\n]/g,""))
+        self.addObj.params(self.addObj.params().replace(/\ +/g,"").replace(/[ ]/g,"").replace(/[\r\n]/g,""))
+    }
     self.update=function(){
         self.editObj.project(self.curProject());
         $.ajax({
