@@ -17,6 +17,31 @@ function ViewModel(){
         this.params=ko.observable(params.params||"");
         this.description=ko.observable(params.description||"");
         this.result=ko.observable("");
+        this.failTpl.subscribe(function(value){
+            if(value){
+                try{JSON.parse(value)}
+                catch (e){
+                    alert("失败模板请输入正确的JSON格式")
+                }
+            }
+        })
+        this.params.subscribe(function(value){
+            if(value){
+                try{JSON.parse(value)}
+                catch (e){
+                    alert("请求参数请输入正确的JSON格式")
+                }
+            }
+
+        })
+        this.successTpl.subscribe(function(value){
+            if(value){
+                try{JSON.parse(value)}
+                catch (e){
+                    alert("请求参数请输入正确的JSON格式")
+                }
+            }
+        })
     }
     self.setCurProject = function(projectName){
         self.curProject(projectName);
@@ -95,6 +120,7 @@ function ViewModel(){
     }
 
     self.add=function(){
+
         self.addObj.project(self.curProject());
         $.ajax({
             url:'/api/interface',
@@ -103,6 +129,11 @@ function ViewModel(){
             success:function(data){
                 $('#addModal').modal('hide')
                 self.getList();
+                for(var index in self.addObj) {
+                    if(ko.isObservable(self.addObj[index])) {
+                        self.addObj[index]("");
+                    }
+                }
             }
         })
     }
