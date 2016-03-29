@@ -43,11 +43,20 @@ app.use('/*',function(req,res,next){
           if(req.baseUrl==data[i].url) {
             //参数验证
             var jparams=JSON.parse(data[i].params);
+
+            for(var key in req.body){
+              console.log(key);
+              console.log(req.body[key]);
+            }
+
+
             for(var key in jparams){
                 if(!req.body[key]){
                   res.send(Mock.mock(JSON.parse(data[i].failTpl)));
                   return;
                 }
+              console.log(key);
+
             }
             res.send(Mock.mock(JSON.parse(data[i].successTpl)));
             return;
