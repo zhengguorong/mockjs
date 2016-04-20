@@ -134,20 +134,23 @@ describe('卡券活动',function(res){
                 .end(function(err,res){
                     var data = res.body;
                     data.should.have.properties({isSuccess:true,responseCode:0});
+                    data.should.have.property('total').which.is.a.Number();
                     var mensendLogs = data.mensendLogs;
                     for(var i = 0;i<mensendLogs.length;i++){
-                        mensendLogs[i].activity.should.have.property('activityCode').which.is.a.String();
-                        mensendLogs[i].activity.should.have.property('activityName').which.is.a.String();
-                        mensendLogs[i].activity.should.have.property('activitySName').which.is.a.String();
-                        mensendLogs[i].activity.should.have.property('startTime').which.is.a.Number();
-                        mensendLogs[i].activity.should.have.property('endTime').which.is.a.Number();
+                        mensendLogs[i].should.have.property('sendNum').which.is.a.Number();
+                        mensendLogs[i].should.have.property('sendTime').which.is.a.Number();
 
                         mensendLogs[i].userBase.should.have.property('mobile').which.is.a.String();
                         mensendLogs[i].userBase.should.have.property('nickName').which.is.a.String();
                         mensendLogs[i].userBase.should.have.property('registTime').which.is.a.Number();
                         mensendLogs[i].userBase.should.have.property('registClient').which.is.a.String();
 
-                        var coupons = mensendLogs[i].coupons;
+                        mensendLogs[i].activity.should.have.property('activityCode').which.is.a.String();
+                        mensendLogs[i].activity.should.have.property('activityName').which.is.a.String();
+                        mensendLogs[i].activity.should.have.property('activitySName').which.is.a.String();
+                        mensendLogs[i].activity.should.have.property('startTime').which.is.a.Number();
+                        mensendLogs[i].activity.should.have.property('endTime').which.is.a.Number();
+                        var coupons = mensendLogs[i].activity.coupons;
                         for(var j = 0;j<coupons.length;j++){
                             coupons[j].should.have.property('couponCode').which.is.a.String();
                             coupons[j].should.have.property('couponName').which.is.a.String();

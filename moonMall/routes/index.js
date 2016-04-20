@@ -53,7 +53,7 @@ router.all('/moonMall-gateway/category/getCategory',function(req,res,next){
 	var failData=Mock.mock({
 		isSuccess:false,
 		responseCode:1101,
-		responseMsg:"非法参数",
+		responseMsg:"非法参数"
 	})
 	if(categoryId||categoryId==""){
 		res.send(successData);
