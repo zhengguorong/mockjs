@@ -96,7 +96,7 @@ describe('卡券活动',function(res){
                     token:token
                     ,mobile:'13344552345'
                     ,activityCode:'YHQ343465432124354'
-                    ,outerCode:[{
+                    ,coupons:[{
                         couponCode:'ZPQ43465432124354'
                         ,couponName:'测试券'
                         ,couponSName:'测试券'
