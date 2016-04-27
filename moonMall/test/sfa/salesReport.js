@@ -1,5 +1,5 @@
 /**
- * Created by huangxueying on 2016/4/27.
+ * 销售报表
  */
 var should = require('should');
 var common =  require('./common');

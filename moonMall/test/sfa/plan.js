@@ -1,5 +1,5 @@
 /**
- * Created by huangxueying on 2016/4/27.
+ * 制定计划
  */
 var should = require('should');
 var common =  require('./common');
