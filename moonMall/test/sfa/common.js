@@ -3,8 +3,8 @@
  */
 
 
-var httpUrl = "http://angelapi.bluemoon.com.cn:8882/bluemoon-control";
-var token = "99f3724f64c189fc7b564baf636e5dad";
+var httpUrl = "http://www.limesoftware.cn:3000";
+var token = "51C9652A5B60281436EB1606E3C9DB58";
 
 module. exports={
     //加入公共参数
