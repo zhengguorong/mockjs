@@ -5,8 +5,9 @@
 //require('./moonAngel/card');
 
 //SFA
-require('./sfa/workToday');
-require('./sfa/helper');
-require('./sfa/myStore');
-require('./sfa/plan');
-require('./sfa/salesReport');
+require('./sfa/user');
+//require('./sfa/workToday');
+//require('./sfa/helper');
+//require('./sfa/myStore');
+//require('./sfa/plan');
+//require('./sfa/salesReport');
