@@ -3,8 +3,8 @@
  */
 
 
-var httpUrl = "http://www.limesoftware.cn:3000";
-var token = "51C9652A5B60281436EB1606E3C9DB58";
+var httpUrl = "https://angelapi.bluemoon.com.cn:8881/bmcrm-control/";
+var token = "0e7cefb7165a4669ef870f9511b6ee69";
 
 module. exports={
     //加入公共参数
